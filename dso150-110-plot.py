@@ -218,18 +218,21 @@ if options.data:  # Python 2/3 OK
     f.write('set label 7 at graph 0.79, 1.015 "' + mLabel[11] + '"\n')
     f.write('set label 8 at graph 0.87, 1.015 "' + mLabel[12] + '"\n')
     f.write('set label 9 at graph 0.94, 1.015 "' + mLabel[13] + '"\n')
-    f.write('set label 10 at graph 0.0, -0.06 "' + mLabel[0] + '"\n')
-    f.write('set label 11 at graph 0.1, -0.055 "' + mLabel[1] + '"\n')
-    f.write('set label 12 at graph 0.2, -0.055 "' + mLabel[2] + '"\n')
-    f.write('set label 13 at graph 0.3, -0.055 "' + mLabel[3] + '"\n')
-    f.write('set label 14 at graph 0.6, -0.055 "' + mLabel[5] + '"\n')
-    f.write('set label 15 at graph 0.73, -0.055 "' + mLabel[6] + '"\n')
-    f.write('set label 16 at graph 0.88, -0.055 "' + mLabel[7] + '"\n')
+    f.write('set label 10 at graph 0.0, -0.07 "' + mLabel[0] + '"\n')
+    f.write('set label 11 at graph 0.1, -0.07 "' + mLabel[1] + '"\n')
+    f.write('set label 12 at graph 0.2, -0.07 "' + mLabel[2] + '"\n')
+    f.write('set label 13 at graph 0.3, -0.07 "' + mLabel[3] + '"\n')
+    f.write('set label 14 at graph 0.6, -0.07 "' + mLabel[5] + '"\n')
+    f.write('set label 15 at graph 0.73, -0.07 "' + mLabel[6] + '"\n')
+    f.write('set label 16 at graph 0.88, -0.07 "' + mLabel[7] + '"\n')
     fd.close()
         
     # every ::21 skips first 20 lines
-    f.write('plot "' + fname + '" every ::21  with lines' + "\n")
-    f.write('pause -1 "Select terminal window, hit RETURN to continue "'  + "\n")
+    f.write('plot "' + fname + '" every ::21 using 1:($2-0.05*$2):($2+0.05*$2) with filledcurves fc rgb "#80E0A080" \
+        title "Error: 5%", \
+        "''" using 1:2 with lines lw 1.5 \
+        title "Volt(Time)"' + "\n")
+    f.write('pause -1 "Select terminal window, hit RETURN to exit "'  + "\n")
     f.close()
     print("Call GNUPlot")
     status = call(['gnuplot', 'dso150_gnuplot.par'])
