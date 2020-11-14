@@ -228,6 +228,7 @@ if options.data:  # Python 2/3 OK
     fd.close()
         
     # every ::21 skips first 20 lines
+    # filledcurves adds Y-errors (5%)
     f.write('plot "' + fname + '" every ::21 using 1:($2-0.05*$2):($2+0.05*$2) with filledcurves fc rgb "#80E0A080" \
         title "Error: 5%", \
         "''" using 1:2 with lines lw 1.5 \
